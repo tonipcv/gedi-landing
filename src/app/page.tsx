@@ -18,23 +18,24 @@ export default function LandingPage() {
 function Nav() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        <a href="#" className="text-sm font-semibold tracking-tight text-grad-light">
-          gedi
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <a href="#" className="flex items-center gap-2 sm:gap-3">
+          <img src="/future.webp" alt="Gedi" className="h-7 w-7 sm:h-8 sm:w-8" />
+          <span className="text-base font-medium tracking-[-0.02em] text-grad-light sm:text-lg">Gedi</span>
         </a>
-        <div className="flex items-center gap-6">
-          <a href="#how" className="text-xs text-silver transition-colors hover:text-grad-subtle">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <a href="#how" className="hidden text-xs text-silver transition-colors hover:text-grad-subtle sm:inline">
             How it works
           </a>
-          <a href="#compare" className="text-xs text-silver transition-colors hover:text-grad-subtle">
+          <a href="#compare" className="hidden text-xs text-silver transition-colors hover:text-grad-subtle sm:inline">
             Compare
           </a>
-          <a href="#testimonials" className="text-xs text-silver transition-colors hover:text-grad-subtle">
+          <a href="#testimonials" className="hidden text-xs text-silver transition-colors hover:text-grad-subtle sm:inline">
             Customers
           </a>
           <a
-            href="https://dash.gedi.dev/signup"
-            className="inline-flex h-8 items-center rounded-lg bg-highlight px-4 text-xs font-medium text-bg transition-opacity hover:opacity-90"
+            href="/signup"
+            className="inline-flex h-8 items-center rounded-lg bg-highlight px-3 text-xs font-medium text-bg transition-opacity hover:opacity-90 sm:px-4"
           >
             Start free
           </a>
@@ -46,33 +47,32 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center">
+    <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-24 pb-12 text-center sm:px-6 sm:pt-20">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.04)_0%,transparent_70%)]" />
 
-      <div className="relative z-10 max-w-3xl">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="text-xs text-grad-subtle">AI search is the new organic traffic</span>
+      <div className="relative z-10 w-full max-w-3xl">
+        <div className="mb-6 sm:mb-8">
+          <img src="/top2.png" alt="Gedi Dashboard" className="mx-auto w-full max-w-4xl" />
         </div>
 
-        <h1 className="text-[56px] font-semibold leading-[1.08] tracking-[-0.03em] text-grad">
+        <h1 className="text-[28px] font-semibold leading-[1.12] tracking-[-0.02em] text-grad sm:text-[42px] md:text-[56px] md:leading-[1.08]">
           Your Brand in Top 1 When Someone Ask in GPT
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-grad-subtle">
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-grad-subtle sm:mt-6 sm:text-base">
           Gedi optimizes your content for AI-powered search engines. ChatGPT, Perplexity, Gemini — your brand shows up first when it matters most.
         </p>
 
-        <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
           <a
-            href="https://dash.gedi.dev/signup"
-            className="inline-flex h-11 items-center rounded-lg bg-highlight px-7 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+            href="/signup"
+            className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-highlight px-7 text-sm font-medium text-bg transition-opacity hover:opacity-90 sm:w-auto"
           >
             Start ranking in AI search
           </a>
           <a
             href="#how"
-            className="inline-flex h-11 items-center rounded-lg border border-border px-7 text-sm text-grad-subtle transition-colors hover:border-muted hover:text-grad-light"
+            className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-border px-7 text-sm text-grad-subtle transition-colors hover:border-muted hover:text-grad-light sm:w-auto"
           >
             See how it works
           </a>
@@ -98,7 +98,7 @@ function Stats() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           The Shift Is Already Happening
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
+        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
           AI search is passing Google
         </h2>
 
@@ -141,7 +141,7 @@ function Testimonials({ id }: { id: string }) {
   ];
 
   return (
-    <section id={id} className="border-t border-border px-6 py-24">
+    <section id={id} className="border-t border-border px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Trusted by Forward-Thinking Teams
@@ -193,7 +193,7 @@ function HowItWorks() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           How Gedi Works
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
+        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
           From zero to AI-ranked in four steps
         </h2>
 
@@ -227,7 +227,7 @@ function Comparison() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Why Gedi
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
+        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
           Same reach. Fraction of the cost.
         </h2>
 
@@ -271,7 +271,7 @@ function RiskFree() {
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Risk Free
         </p>
-        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-grad-light">
+        <h2 className="mt-4 text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
           Try Gedi for 7 days. No credit card.
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-grad-subtle">
@@ -280,7 +280,7 @@ function RiskFree() {
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <a
-            href="https://dash.gedi.dev/signup"
+            href="/signup"
             className="inline-flex h-11 items-center rounded-lg bg-highlight px-7 text-sm font-medium text-bg transition-opacity hover:opacity-90"
           >
             Start free trial
@@ -333,12 +333,12 @@ function TestimonialsSecond({ id }: { id: string }) {
   ];
 
   return (
-    <section id={id} className="border-t border-border px-6 py-24">
+    <section id={id} className="border-t border-border px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           More Stories
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
+        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
           Teams winning with Gedi
         </h2>
 
@@ -365,16 +365,16 @@ function CTA() {
   return (
     <section className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-4xl font-semibold tracking-tight text-grad">
+        <h2 className="text-2xl font-semibold tracking-tight text-grad sm:text-4xl">
           The next wave of search is here.
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-grad-subtle">
+        <p className="mt-4 text-sm leading-relaxed text-grad-subtle sm:text-base">
           AI search engines already handle billions of queries. Brands that optimize now will own the next decade of organic traffic. Don&apos;t wait until your competitors get there first.
         </p>
 
         <div className="mt-10">
           <a
-            href="https://dash.gedi.dev/signup"
+            href="/signup"
             className="inline-flex h-12 items-center rounded-lg bg-highlight px-8 text-sm font-medium text-bg transition-opacity hover:opacity-90"
           >
             Start ranking in AI search — free
@@ -396,7 +396,7 @@ function Footer() {
           <a href="https://dash.gedi.dev/login" className="transition-colors hover:text-grad-subtle">
             Sign in
           </a>
-          <a href="https://dash.gedi.dev/signup" className="transition-colors hover:text-grad-subtle">
+          <a href="/signup" className="transition-colors hover:text-grad-subtle">
             Start free
           </a>
           <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-grad-subtle">
