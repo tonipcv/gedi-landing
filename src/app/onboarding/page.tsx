@@ -125,14 +125,9 @@ export default function OnboardingPage() {
       <div className="min-h-screen bg-bg px-4 py-16">
         <Header progress={100} />
         <div className="mx-auto mt-12 max-w-xl">
-          <div className="flex items-start gap-4">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-              <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-            </div>
-            <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-              <h2 className="text-lg font-semibold text-grad-light">Analyzing your business...</h2>
-              <p className="mt-1 text-sm text-grad-subtle">Building your personalized growth plan.</p>
-            </div>
+          <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+            <h2 className="text-lg font-semibold text-grad-light">Analyzing your business...</h2>
+            <p className="mt-1 text-sm text-grad-subtle">Building your personalized growth plan.</p>
           </div>
           <div className="mt-6 space-y-3">
             {loadingSteps.map((ls, i) => {
@@ -164,7 +159,7 @@ export default function OnboardingPage() {
         <div className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
           <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
             <a href="/" className="flex items-center gap-2">
-              <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
+              <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
               <span className="text-sm font-medium text-grad-light">Gedi</span>
             </a>
             <div className="flex items-center gap-3">
@@ -177,27 +172,29 @@ export default function OnboardingPage() {
         <div className="mx-auto max-w-2xl px-4 pt-20 pb-16 space-y-16">
           {/* Result preview */}
           <section className="space-y-5">
-            <div className="flex items-start gap-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
+            <div className="rounded-2xl border border-border bg-surface px-5 py-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="grid h-6 w-6 place-items-center rounded bg-border text-[10px] font-bold text-grad-subtle">{siteName?.[0]?.toUpperCase() || "S"}</div>
+                <span className="text-sm font-medium text-grad-light">{siteName || url}</span>
               </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="grid h-6 w-6 place-items-center rounded bg-border text-[10px] font-bold text-muted">{siteName?.[0]?.toUpperCase() || "S"}</div>
-                  <span className="text-sm font-medium text-grad-light">{siteName || url}</span>
-                </div>
-                <h2 className="text-xl font-semibold text-grad-light">Your growth plan is ready!</h2>
-                <p className="mt-2 text-sm leading-relaxed text-grad-subtle">I found a clear path to grow your traffic and get more customers from Google and AI search. You should see your first growth signals in the first 2 weeks!</p>
-              </div>
+              <h2 className="text-xl font-semibold text-grad-light">Your growth plan is ready!</h2>
+              <p className="mt-2 text-sm leading-relaxed text-grad-subtle">I found a clear path to grow your traffic and get more customers from Google and AI search. You should see your first growth signals in the first 2 weeks!</p>
             </div>
-            <div className="rounded-xl border border-border bg-surface p-4">
-              <div className="flex items-end gap-1 h-24">
-                {["Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun"].map((m, i) => (
-                  <div key={m} className="flex-1 flex flex-col items-center gap-1">
-                    <div className="w-full rounded-sm bg-highlight" style={{ height: `${8 + i * 7}%`, opacity: 0.3 + i * 0.06 }} />
-                    <span className="text-[9px] text-muted">{m}</span>
+            <div className="rounded-xl border border-border bg-surface p-5">
+              <p className="text-xs font-medium text-grad-subtle mb-3 uppercase tracking-wider">Traffic Growth Projection — 12 Months</p>
+              <div className="flex items-end gap-1.5 h-32 sm:h-40">
+                {[6, 10, 14, 20, 24, 32, 38, 48, 56, 70, 82, 100].map((h, i) => (
+                  <div key={i} className="flex-1 flex flex-col justify-end items-center gap-1.5">
+                    <div className="w-full rounded-t-sm bg-gradient-to-t from-highlight/60 to-highlight transition-all hover:from-highlight/80 hover:to-highlight" style={{ height: `${h}%` }}>
+                      <div className="w-full h-full bg-highlight/30 rounded-t-sm" style={{ clipPath: `polygon(0 0, 100% 0, 100% ${100 - i * 4}%, 0 ${100 - i * 3}%)` }} />
+                    </div>
+                    <span className="text-[9px] text-grad-subtle">{["Jul","Ago","Set","Out","Nov","Dez","Jan","Fev","Mar","Abr","Mai","Jun"][i]}</span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-3 flex items-center justify-between text-xs">
+                <span className="text-grad-subtle">Month 1: ~500 visits</span>
+                <span className="text-grad-light font-medium">Month 12: 25,000+ visits</span>
               </div>
             </div>
           </section>
@@ -359,14 +356,9 @@ export default function OnboardingPage() {
 
           {/* Final CTA */}
           <section className="space-y-5 text-center">
-            <div className="flex items-start gap-4 text-left">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-              </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-                <p className="text-sm text-grad-subtle">Ready to grow your traffic?</p>
-                <p className="mt-1 text-sm font-medium text-grad-light">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
-              </div>
+            <div className="rounded-2xl border border-border bg-surface px-5 py-4 text-left">
+              <p className="text-sm text-grad-subtle">Ready to grow your traffic?</p>
+              <p className="mt-1 text-sm font-medium text-grad-light">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
             </div>
             <a href={`https://dash.gedi.dev/signup?email=${encodeURIComponent(email)}`} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
               Get Traffic on Autopilot <ArrowRight size={16} />
@@ -386,14 +378,9 @@ export default function OnboardingPage() {
         {/* Step 0: URL entry */}
         {step === 0 && (
           <>
-            <div className="flex items-start gap-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-              </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-                <h2 className="text-lg font-semibold text-grad-light">Enter your website URL</h2>
-                <p className="mt-1 text-sm leading-relaxed text-grad-subtle">I&apos;ll scan your site and build a personalized content plan to grow your traffic from Google, ChatGPT, and other search engines.</p>
-              </div>
+            <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+              <h2 className="text-lg font-semibold text-grad-light">Enter your website URL</h2>
+              <p className="mt-1 text-sm leading-relaxed text-grad-subtle">I&apos;ll scan your site and build a personalized content plan to grow your traffic from Google, ChatGPT, and other search engines.</p>
             </div>
             <div className="relative">
               <Globe size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
@@ -409,15 +396,10 @@ export default function OnboardingPage() {
         {/* Step 1: Goal */}
         {step === 1 && (
           <>
-            <div className="flex items-start gap-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-              </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+            <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
                 <h2 className="text-lg font-semibold text-grad-light">What&apos;s your main goal?</h2>
                 <p className="mt-1 text-sm leading-relaxed text-grad-subtle">I&apos;ll prioritize keywords and content topics based on what matters most to your business.</p>
               </div>
-            </div>
             <div className="space-y-3">
               {goals.map((g) => (
                 <button key={g.id} onClick={() => handleGoalClick(g.id)} className={`flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all ${goal === g.id ? "border-muted bg-surface ring-1 ring-muted/30" : "border-border bg-surface hover:border-muted"}`}>
@@ -435,15 +417,10 @@ export default function OnboardingPage() {
         {/* Step 2: Traffic */}
         {step === 2 && (
           <>
-            <div className="flex items-start gap-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-              </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+            <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
                 <h2 className="text-lg font-semibold text-grad-light">How much traffic do you currently get?</h2>
                 <p className="mt-1 text-sm leading-relaxed text-grad-subtle">This helps me understand your starting point and estimate your growth potential.</p>
               </div>
-            </div>
             <div className="space-y-3">
               {trafficLevels.map((t) => (
                 <button key={t.id} onClick={() => handleTrafficClick(t.id)} className={`flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all ${traffic === t.id ? "border-muted bg-surface ring-1 ring-muted/30" : "border-border bg-surface hover:border-muted"}`}>
@@ -551,14 +528,9 @@ export default function OnboardingPage() {
         {/* Step 9: Email capture */}
         {step === 9 && (
           <>
-            <div className="flex items-start gap-4">
-              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-                <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-              </div>
-              <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-                <h2 className="text-lg font-semibold text-grad-light">Save your progress</h2>
-                <p className="mt-1 text-sm leading-relaxed text-grad-subtle">Enter your email to save your personalized growth plan.</p>
-              </div>
+            <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+              <h2 className="text-lg font-semibold text-grad-light">Save your progress</h2>
+              <p className="mt-1 text-sm leading-relaxed text-grad-subtle">Enter your email to save your personalized growth plan.</p>
             </div>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleContinue()} className="w-full rounded-xl border border-border bg-surface py-3 px-4 text-sm text-grad-subtle placeholder:text-muted focus:border-muted focus:outline-none" placeholder="Enter your email..." />
             <button onClick={handleContinue} disabled={!emailValid} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-40">
@@ -584,7 +556,7 @@ function Header({ progress, onBack }: { progress: number; onBack?: () => void })
           <div />
         )}
         <div className="flex items-center gap-2">
-          <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
+          <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
           <span className="text-sm font-medium text-grad-light">Gedi</span>
         </div>
         <div className="w-16" />
@@ -601,15 +573,10 @@ function Header({ progress, onBack }: { progress: number; onBack?: () => void })
 function InfoStep({ title, text, onContinue, children }: { title: string; text: string; onContinue: () => void; children?: React.ReactNode }) {
   return (
     <>
-      <div className="flex items-start gap-4">
-        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-surface">
-          <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
-        </div>
-        <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
-          <h2 className="text-lg font-semibold text-grad-light">{title}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-grad-subtle">{text}</p>
-          {children}
-        </div>
+      <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
+        <h2 className="text-lg font-semibold text-grad-light">{title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-grad-subtle">{text}</p>
+        {children}
       </div>
       <button onClick={onContinue} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
         Continue <ArrowRight size={16} />

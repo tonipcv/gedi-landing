@@ -30,7 +30,7 @@ export default function SignupPage() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-bg px-4">
         <div className="fixed top-0 z-50 flex h-14 w-full items-center justify-center border-b border-border bg-bg/80 backdrop-blur-xl">
           <a href="/" className="flex items-center gap-2">
-            <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
+            <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
             <span className="text-sm font-medium text-grad-light">Gedi</span>
           </a>
         </div>
@@ -49,7 +49,7 @@ export default function SignupPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-bg px-4">
       <div className="fixed top-0 z-50 flex h-14 w-full items-center justify-center border-b border-border bg-bg/80 backdrop-blur-xl">
         <a href="/" className="flex items-center gap-2">
-          <img src="/future.webp" alt="Gedi" className="h-6 w-6" />
+          <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
           <span className="text-sm font-medium text-grad-light">Gedi</span>
         </a>
       </div>

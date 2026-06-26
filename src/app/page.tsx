@@ -20,7 +20,7 @@ function Nav() {
     <nav className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2 sm:gap-3">
-          <img src="/future.webp" alt="Gedi" className="h-7 w-7 sm:h-8 sm:w-8" />
+          <img src="/future.webp" alt="Gedi" className="h-7 w-7 sm:h-8 sm:w-8 grayscale" />
           <span className="text-base font-medium tracking-[-0.02em] text-grad-light sm:text-lg">Gedi</span>
         </a>
         <div className="flex items-center gap-4 sm:gap-6">
@@ -52,7 +52,7 @@ function Hero() {
 
       <div className="relative z-10 w-full max-w-3xl">
         <div className="mb-6 sm:mb-8">
-          <img src="/top2.png" alt="Gedi Dashboard" className="mx-auto w-full max-w-4xl" />
+          <img src="/top2.png" alt="Gedi Dashboard" className="mx-auto w-full max-w-4xl grayscale" />
         </div>
 
         <h1 className="text-[28px] font-semibold leading-[1.12] tracking-[-0.02em] text-grad sm:text-[42px] md:text-[56px] md:leading-[1.08]">
