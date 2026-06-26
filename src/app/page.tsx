@@ -19,17 +19,17 @@ function Nav() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        <a href="#" className="text-sm font-semibold tracking-tight text-highlight">
+        <a href="#" className="text-sm font-semibold tracking-tight text-grad-light">
           gedi
         </a>
         <div className="flex items-center gap-6">
-          <a href="#how" className="text-xs text-silver transition-colors hover:text-highlight">
+          <a href="#how" className="text-xs text-silver transition-colors hover:text-grad-subtle">
             How it works
           </a>
-          <a href="#compare" className="text-xs text-silver transition-colors hover:text-highlight">
+          <a href="#compare" className="text-xs text-silver transition-colors hover:text-grad-subtle">
             Compare
           </a>
-          <a href="#testimonials" className="text-xs text-silver transition-colors hover:text-highlight">
+          <a href="#testimonials" className="text-xs text-silver transition-colors hover:text-grad-subtle">
             Customers
           </a>
           <a
@@ -52,14 +52,14 @@ function Hero() {
       <div className="relative z-10 max-w-3xl">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="text-xs text-silver">AI search is the new organic traffic</span>
+          <span className="text-xs text-grad-subtle">AI search is the new organic traffic</span>
         </div>
 
-        <h1 className="text-[56px] font-semibold leading-[1.08] tracking-[-0.03em] text-highlight">
+        <h1 className="text-[56px] font-semibold leading-[1.08] tracking-[-0.03em] text-grad">
           Your Brand in Top 1 When Someone Ask in GPT
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-silver">
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-grad-subtle">
           Gedi optimizes your content for AI-powered search engines. ChatGPT, Perplexity, Gemini — your brand shows up first when it matters most.
         </p>
 
@@ -72,7 +72,7 @@ function Hero() {
           </a>
           <a
             href="#how"
-            className="inline-flex h-11 items-center rounded-lg border border-border px-7 text-sm text-silver transition-colors hover:border-muted hover:text-accent"
+            className="inline-flex h-11 items-center rounded-lg border border-border px-7 text-sm text-grad-subtle transition-colors hover:border-muted hover:text-grad-light"
           >
             See how it works
           </a>
@@ -98,17 +98,17 @@ function Stats() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           The Shift Is Already Happening
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-highlight">
+        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
           AI search is passing Google
         </h2>
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-2 bg-surface px-6 py-10">
-              <span className="text-[40px] font-semibold tracking-tight text-highlight">
+              <span className="text-[40px] font-semibold tracking-tight text-grad-stat">
                 {stat.value}
               </span>
-              <span className="text-center text-xs leading-relaxed text-muted">{stat.label}</span>
+              <span className="text-center text-xs leading-relaxed text-grad-subtle">{stat.label}</span>
             </div>
           ))}
         </div>
@@ -150,9 +150,9 @@ function Testimonials({ id }: { id: string }) {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
-              <p className="text-sm leading-relaxed text-silver">&ldquo;{q.text}&rdquo;</p>
+              <p className="text-sm leading-relaxed text-grad-subtle">&ldquo;{q.text}&rdquo;</p>
               <div className="mt-6 border-t border-border pt-4">
-                <p className="text-sm font-medium text-accent">{q.name}</p>
+                <p className="text-sm font-medium text-grad-light">{q.name}</p>
                 <p className="text-xs text-muted">{q.role}</p>
               </div>
             </div>
@@ -193,7 +193,7 @@ function HowItWorks() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           How Gedi Works
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-highlight">
+        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
           From zero to AI-ranked in four steps
         </h2>
 
@@ -201,8 +201,8 @@ function HowItWorks() {
           {steps.map((s) => (
             <div key={s.step} className="gradient-border rounded-xl bg-surface p-6">
               <span className="text-xs font-medium text-muted">{s.step}</span>
-              <h3 className="mt-3 text-sm font-semibold text-highlight">{s.title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted">{s.description}</p>
+              <h3 className="mt-3 text-sm font-semibold text-grad-light">{s.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-grad-subtle">{s.description}</p>
             </div>
           ))}
         </div>
@@ -227,7 +227,7 @@ function Comparison() {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Why Gedi
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-highlight">
+        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
           Same reach. Fraction of the cost.
         </h2>
 
@@ -236,7 +236,7 @@ function Comparison() {
             <thead>
               <tr className="border-b border-border">
                 <th className="pb-3 pr-4 font-medium text-muted" />
-                <th className="pb-3 pr-4 font-semibold text-highlight">Gedi</th>
+                <th className="pb-3 pr-4 font-semibold text-grad-light">Gedi</th>
                 <th className="pb-3 pr-4 font-medium text-muted">Google Ads</th>
                 <th className="pb-3 pr-4 font-medium text-muted">Facebook Ads</th>
                 <th className="pb-3 pr-4 font-medium text-muted">Other SEO tools</th>
@@ -246,7 +246,7 @@ function Comparison() {
               {rows.map((row) => (
                 <tr key={row.label} className="border-b border-border">
                   <td className="py-3 pr-4 text-muted">{row.label}</td>
-                  <td className="py-3 pr-4 font-medium text-accent">{row.gedi}</td>
+                  <td className="py-3 pr-4 font-medium text-grad-subtle">{row.gedi}</td>
                   <td className="py-3 pr-4 text-muted">{row.ads}</td>
                   <td className="py-3 pr-4 text-muted">{row.fb}</td>
                   <td className="py-3 pr-4 text-muted">{row.other}</td>
@@ -271,10 +271,10 @@ function RiskFree() {
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Risk Free
         </p>
-        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-highlight">
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-grad-light">
           Try Gedi for 7 days. No credit card.
         </h2>
-        <p className="mt-4 text-sm leading-relaxed text-silver">
+        <p className="mt-4 text-sm leading-relaxed text-grad-subtle">
           If you don&apos;t see your brand showing up in AI search results within a week, cancel anytime. You keep all generated content regardless.
         </p>
 
@@ -287,7 +287,7 @@ function RiskFree() {
           </a>
           <a
             href="#testimonials2"
-            className="inline-flex h-11 items-center rounded-lg border border-border px-7 text-sm text-silver transition-colors hover:border-muted hover:text-accent"
+            className="inline-flex h-11 items-center rounded-lg border border-border px-7 text-sm text-grad-subtle transition-colors hover:border-muted hover:text-grad-light"
           >
             Read more stories
           </a>
@@ -300,8 +300,8 @@ function RiskFree() {
             { title: "Proven results", desc: "Our customers see AI search mentions within the first week." },
           ].map((item) => (
             <div key={item.title} className="rounded-xl border border-border bg-surface p-6 text-left">
-              <h3 className="text-sm font-semibold text-highlight">{item.title}</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted">{item.desc}</p>
+              <h3 className="text-sm font-semibold text-grad-light">{item.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-grad-subtle">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -338,19 +338,19 @@ function TestimonialsSecond({ id }: { id: string }) {
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           More Stories
         </p>
-        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-highlight">
+        <h2 className="mt-4 text-center text-3xl font-semibold tracking-tight text-grad-light">
           Teams winning with Gedi
         </h2>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
-              <span className="inline-block rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-accent">
+              <span className="inline-block rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-grad-subtle">
                 {q.metric}
               </span>
-              <p className="mt-4 text-sm leading-relaxed text-silver">&ldquo;{q.text}&rdquo;</p>
+              <p className="mt-4 text-sm leading-relaxed text-grad-subtle">&ldquo;{q.text}&rdquo;</p>
               <div className="mt-6 border-t border-border pt-4">
-                <p className="text-sm font-medium text-accent">{q.name}</p>
+                <p className="text-sm font-medium text-grad-light">{q.name}</p>
                 <p className="text-xs text-muted">{q.role}</p>
               </div>
             </div>
@@ -365,10 +365,10 @@ function CTA() {
   return (
     <section className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-4xl font-semibold tracking-tight text-highlight">
+        <h2 className="text-4xl font-semibold tracking-tight text-grad">
           The next wave of search is here.
         </h2>
-        <p className="mt-4 text-base leading-relaxed text-silver">
+        <p className="mt-4 text-base leading-relaxed text-grad-subtle">
           AI search engines already handle billions of queries. Brands that optimize now will own the next decade of organic traffic. Don&apos;t wait until your competitors get there first.
         </p>
 
@@ -393,13 +393,13 @@ function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-xs text-muted sm:flex-row">
         <p>&copy; {new Date().getFullYear()} Gedi. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="https://dash.gedi.dev/login" className="transition-colors hover:text-silver">
+          <a href="https://dash.gedi.dev/login" className="transition-colors hover:text-grad-subtle">
             Sign in
           </a>
-          <a href="https://dash.gedi.dev/signup" className="transition-colors hover:text-silver">
+          <a href="https://dash.gedi.dev/signup" className="transition-colors hover:text-grad-subtle">
             Start free
           </a>
-          <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-silver">
+          <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-grad-subtle">
             Contact
           </a>
         </div>

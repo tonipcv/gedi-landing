@@ -20,11 +20,41 @@ body {
   color: #f5f5f5;
 }
 
-.gradient-text {
-  background: linear-gradient(180deg, #f5f5f5 0%, #a3a3a3 50%, #525252 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@layer utilities {
+  .text-grad {
+    background: linear-gradient(180deg, #f5f5f5 0%, #d4d4d4 25%, #a3a3a3 50%, #737373 75%, #525252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-grad-light {
+    background: linear-gradient(180deg, #fafafa 0%, #e5e5e5 40%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-grad-subtle {
+    background: linear-gradient(180deg, #d4d4d4 0%, #a3a3a3 50%, #737373 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-grad-h {
+    background: linear-gradient(90deg, #737373 0%, #d4d4d4 50%, #737373 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-grad-stat {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 30%, #d4d4d4 60%, #a3a3a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .gradient-border {
