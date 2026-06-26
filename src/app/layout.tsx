@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Gedi" }],
   creator: "Gedi",
   publisher: "Gedi",
+  icons: { icon: "/favicon.ico" },
   formatDetection: { telephone: false },
   alternates: {
     canonical: BASE_URL,
