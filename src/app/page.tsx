@@ -121,6 +121,18 @@ function Stats() {
   );
 }
 
+function Stars() {
+  return (
+    <div className="flex gap-0.5 mb-3" aria-label="5 stars">
+      {[...Array(5)].map((_, i) => (
+        <svg key={i} className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill="#F59E0B" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
 function Testimonials({ id }: { id: string }) {
   const quotes = [
     {
@@ -138,6 +150,21 @@ function Testimonials({ id }: { id: string }) {
       name: "Elena Kowalski",
       role: "Marketing Director at Flux AI",
     },
+    {
+      text: "We integrated Gedi into our content pipeline and saw a 210% increase in AI-driven organic leads within the first month. It's now core to our growth stack.",
+      name: "Dr. Aisha Okafor",
+      role: "CTO at NeuroPilot",
+    },
+    {
+      text: "Our agency manages 40+ brands. Gedi replaced three legacy SEO tools and cut our per-client cost by 60%. The AI ranking features are unmatched.",
+      name: "Lukas Bergström",
+      role: "SEO Director at Creitive",
+    },
+    {
+      text: "I was tired of burning budget on PPC. Gedi's organic AI traffic outperformed our Google Ads campaign in 5 weeks. Best decision this year.",
+      name: "Rachel Kim",
+      role: "VP of Digital at Luminora",
+    },
   ];
 
   return (
@@ -150,6 +177,7 @@ function Testimonials({ id }: { id: string }) {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
+              <Stars />
               <p className="text-sm leading-relaxed text-grad-subtle">&ldquo;{q.text}&rdquo;</p>
               <div className="mt-6 border-t border-border pt-4">
                 <p className="text-sm font-medium text-grad-light">{q.name}</p>
@@ -330,6 +358,24 @@ function TestimonialsSecond({ id }: { id: string }) {
       role: "Founder at ShipFast",
       metric: "12% GPT mention rate",
     },
+    {
+      text: "Gedi paid for itself in the first 10 days. We saw 8x ROI within a month by ranking in ChatGPT and Perplexity for our top 20 keywords.",
+      name: "Olivia Dupont",
+      role: "Head of Content at Zelios",
+      metric: "8x ROI in 30 days",
+    },
+    {
+      text: "We were invisible in AI search before Gedi. Now 62% of our organic traffic comes from ChatGPT and Gemini referrals. Game changer.",
+      name: "Kenji Tanaka",
+      role: "Growth Lead at OmniStack",
+      metric: "62% more AI traffic",
+    },
+    {
+      text: "As a healthcare brand, trust and visibility are everything. Gedi helped us rank for medical queries in AI search, cutting our CAC by 40%.",
+      name: "Maria Santos",
+      role: "CMO at Boreal Health",
+      metric: "Cut CAC by 40%",
+    },
   ];
 
   return (
@@ -345,6 +391,7 @@ function TestimonialsSecond({ id }: { id: string }) {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
+              <Stars />
               <span className="inline-block rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-grad-subtle">
                 {q.metric}
               </span>
