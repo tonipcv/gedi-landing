@@ -6,7 +6,7 @@ const BASE_URL = "https://gedi.dev";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Gedi — Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
+    default: "Gedi: Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
     template: "%s | Gedi",
   },
   description:
@@ -26,14 +26,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Gedi" }],
   creator: "Gedi",
   publisher: "Gedi",
-  icons: { icon: "/favicon.ico" },
   formatDetection: { telephone: false },
   alternates: {
     canonical: BASE_URL,
     languages: { "en-US": BASE_URL },
   },
   openGraph: {
-    title: "Gedi — Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
+    title: "Gedi: Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
     description:
       "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Rank in ChatGPT, Perplexity, and Google. Start free.",
     url: BASE_URL,
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gedi — Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
+    title: "Gedi: Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
     description:
       "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Start free.",
   },
@@ -58,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
