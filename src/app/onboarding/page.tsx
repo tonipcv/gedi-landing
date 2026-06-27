@@ -677,13 +677,25 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
 }
 
 function SocialProof() {
+  const avatars = [
+    "https://i.pravatar.cc/48?img=1",
+    "https://i.pravatar.cc/48?img=5",
+    "https://i.pravatar.cc/48?img=3",
+    "https://i.pravatar.cc/48?img=8",
+    "https://i.pravatar.cc/48?img=11",
+  ];
+
   return (
     <div className="flex flex-col items-center gap-2 pt-2">
       <div className="flex -space-x-2">
-        {["bg-highlight","bg-muted","bg-highlight","bg-muted","bg-highlight"].map((c, i) => (
-          <div key={i} className={`grid h-7 w-7 place-items-center rounded-full border-2 border-bg ${c}`}>
-            <span className="text-[9px] font-bold text-bg">{String.fromCharCode(65 + i)}</span>
-          </div>
+        {avatars.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt=""
+            className="h-7 w-7 rounded-full border-2 border-bg object-cover grayscale"
+            loading="lazy"
+          />
         ))}
       </div>
       <div className="flex gap-0.5 text-highlight">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
