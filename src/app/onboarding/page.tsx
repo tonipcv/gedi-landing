@@ -55,6 +55,7 @@ export default function OnboardingPage() {
   const [yearly, setYearly] = useState(false);
   const [restored, setRestored] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [checkingOut, setCheckingOut] = useState(false);
 
   const totalSteps = 11;
   const progress = step <= 0 ? 0 : Math.round((step / (totalSteps - 1)) * 100);
@@ -199,18 +200,30 @@ export default function OnboardingPage() {
   const wordCount = 1500;
   const price = yearly ? 19 : 29;
   const originalPrice = 49;
-  const signupHref = (() => {
-    const params = new URLSearchParams({
-      email,
-      websiteUrl: normalizeUrl(url),
-      leadId,
-      goal,
-      traffic,
-      plan: yearly ? "yearly" : "monthly",
-      source: "landing_onboarding",
-    });
-    return `${APP_URL}/signup?${params.toString()}`;
-  })();
+  async function handleCheckout() {
+    setCheckingOut(true);
+    try {
+      const res = await fetch(`${APP_URL}/api/landing/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          websiteUrl: normalizeUrl(url),
+          leadId,
+          goal,
+          traffic,
+          plan: yearly ? "yearly" : "monthly",
+          siteName,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setCheckingOut(false);
+    }
+  }
 
   // STEP 8: Loading
   if (step === 8) {
@@ -331,9 +344,10 @@ export default function OnboardingPage() {
                 <span className="text-3xl font-bold text-grad-light">${price}</span>
                 <span className="text-sm text-muted">/month</span>
               </div>
-              <a href={signupHref} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
-                Buy Now <ArrowRight size={16} />
-              </a>
+              <button onClick={handleCheckout} disabled={checkingOut} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-50">
+                {checkingOut ? "Redirecting..." : "Buy Now"}
+                {!checkingOut && <ArrowRight size={16} />}
+              </button>
               <p className="mt-2 text-xs text-muted">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
               <div className="mt-5 space-y-2 border-t border-border pt-5">
                 {["Personalized growth plan", `${articleCount} SEO/GEO articles (1 daily)`, `${wordCount}+ word long-form articles`, "Auto-publish to your website", "10 backlink credits monthly", "Auto images, links & promotion", "Unlimited rewrites & team members"].map((f) => (
@@ -466,9 +480,10 @@ export default function OnboardingPage() {
               <p className="text-sm text-grad-subtle">Ready to grow your traffic?</p>
               <p className="mt-1 text-sm font-medium text-grad-light">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
             </div>
-            <a href={signupHref} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
-              Get Traffic on Autopilot <ArrowRight size={16} />
-            </a>
+            <button onClick={handleCheckout} disabled={checkingOut} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-50">
+              {checkingOut ? "Redirecting..." : "Get Traffic on Autopilot"}
+              {!checkingOut && <ArrowRight size={16} />}
+            </button>
           </section>
         </div>
         <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
