@@ -203,7 +203,7 @@ export default function OnboardingPage() {
   async function handleCheckout() {
     setCheckingOut(true);
     try {
-      const res = await fetch(`${APP_URL}/api/landing/checkout`, {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
