@@ -170,6 +170,7 @@ function Testimonials({ id }: { id: string }) {
   return (
     <section id={id} className="border-t border-border px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
+        <img src="/before.webp" alt="Before and After Results" className="mx-auto mb-12 w-full max-w-4xl rounded-xl" />
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Trusted by Forward-Thinking Teams
         </p>
