@@ -95,6 +95,7 @@ function Stats() {
   return (
     <section className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-5xl">
+        <img src="/after.webp" alt="AI Search Growth" className="mx-auto mb-12 w-full max-w-4xl rounded-xl" />
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           The Shift Is Already Happening
         </p>
