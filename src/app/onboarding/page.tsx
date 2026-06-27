@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Globe, Loader2, Star } from "lucide-react";
+import { ResultsCarousel } from "@/components/results-carousel";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://dash.gedi.dev";
 const ONBOARDING_STORAGE_KEY = "gedi_landing_onboarding";
@@ -678,28 +679,29 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
 
 function SocialProof() {
   const avatars = [
-    "https://i.pravatar.cc/48?img=1",
-    "https://i.pravatar.cc/48?img=5",
-    "https://i.pravatar.cc/48?img=3",
-    "https://i.pravatar.cc/48?img=8",
-    "https://i.pravatar.cc/48?img=11",
+    "https://i.pravatar.cc/96?img=1",
+    "https://i.pravatar.cc/96?img=5",
+    "https://i.pravatar.cc/96?img=3",
+    "https://i.pravatar.cc/96?img=8",
+    "https://i.pravatar.cc/96?img=11",
   ];
 
   return (
-    <div className="flex flex-col items-center gap-2 pt-2">
+    <div className="flex flex-col items-center gap-4 pt-2">
       <div className="flex -space-x-2">
         {avatars.map((src, i) => (
           <img
             key={i}
             src={src}
             alt=""
-            className="h-7 w-7 rounded-full border-2 border-bg object-cover grayscale"
+            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-bg object-cover grayscale"
             loading="lazy"
           />
         ))}
       </div>
       <div className="flex gap-0.5 text-highlight">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
       <p className="text-xs text-muted">3,000+ happy customers</p>
+      <ResultsCarousel />
     </div>
   );
 }
