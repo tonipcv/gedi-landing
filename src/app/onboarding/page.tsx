@@ -190,8 +190,8 @@ export default function OnboardingPage() {
     setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
   }, [email]);
 
-  const description = "an AI quality platform connecting real-world failures to domain experts";
-  const trafficLabel = trafficLevels.find((t) => t.id === traffic)?.range || "growing";
+  const description = `${siteName || url} operates in a competitive online space`;
+  const trafficLabel = trafficLevels.find((t) => t.id === traffic)?.label?.toLowerCase() || "moderate traffic";
   const goalLabel = goals.find((g) => g.id === goal)?.title?.toLowerCase() || "growing your business";
   const articleCount = 30;
   const wordCount = 1500;
@@ -568,7 +568,15 @@ export default function OnboardingPage() {
         )}
 
         {/* Step 3: AI Analysis */}
-        {step === 3 && <InfoStep title={`I took a look at ${siteName || url}`} text={`You're ${description}. With ${trafficLabel} monthly visitors and a focus on ${goalLabel}, boosting your search visibility is key. Gedi will automatically publish over ${articleCount} SEO articles each month, targeting the keywords your potential audience is actively searching for. We'll also build backlinks to help elevate your site's ranking on Google and AI search engines, ensuring you reach the right people.`} onContinue={handleContinue} />}
+        {step === 3 && (
+          <TypewriterAnalysis
+            siteName={siteName || url}
+            trafficLabel={trafficLabel}
+            goalLabel={goalLabel}
+            articleCount={articleCount}
+            onContinue={handleContinue}
+          />
+        )}
 
         {/* Step 4: AI Search wave */}
         {step === 4 && (
@@ -741,6 +749,70 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
       </button>
     </>
   );
+}
+
+function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, onContinue }: {
+  siteName: string;
+  trafficLabel: string;
+  goalLabel: string;
+  articleCount: number;
+  onContinue: () => void;
+}) {
+  const [visible, setVisible] = useState(false);
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 400);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const t = setTimeout(() => setDone(true), 2500);
+    return () => clearTimeout(t);
+  }, [visible]);
+
+  const intro = `I took a look at ${siteName}`;
+  const body = `I analyzed your site's structure, content, and SEO footprint. With ${trafficLabel} and a focus on ${goalLabel}, there's a clear gap between where you are and where you could be. Gedi will publish ${articleCount} SEO-optimized articles each month targeting keywords your audience is searching for right now. Combined with automated backlinks and GEO optimization for ChatGPT and Perplexity, your organic visibility will compound over time.`;
+
+  return (
+    <div className="space-y-5">
+      <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4 transition-opacity duration-500" style={{ opacity: visible ? 1 : 0 }}>
+        <h2 className="text-lg font-semibold text-grad-light">
+          {visible ? <Typewriter text={intro} speed={25} /> : "\u00A0"}
+        </h2>
+        <div className="mt-2 text-sm leading-relaxed text-grad-subtle">
+          {visible ? <Typewriter text={body} speed={10} startDelay={intro.length * 25 + 300} /> : "\u00A0"}
+        </div>
+      </div>
+      {done && (
+        <button onClick={onContinue} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 animate-in fade-in">
+          Continue <ArrowRight size={16} />
+        </button>
+      )}
+    </div>
+  );
+}
+
+function Typewriter({ text, speed, startDelay = 0 }: { text: string; speed: number; startDelay?: number }) {
+  const [chars, setChars] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (startDelay > 0) {
+      const t = setTimeout(() => setStarted(true), startDelay);
+      return () => clearTimeout(t);
+    }
+    setStarted(true);
+  }, [startDelay]);
+
+  useEffect(() => {
+    if (!started || chars >= text.length) return;
+    const t = setTimeout(() => setChars((c) => c + 1), speed);
+    return () => clearTimeout(t);
+  }, [started, chars, text.length, speed]);
+
+  return <>{text.slice(0, chars)}{chars < text.length && <span className="animate-pulse">|</span>}</>;
 }
 
 function SocialProof() {
