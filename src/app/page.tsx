@@ -36,7 +36,7 @@ function Nav() {
             Customers
           </a>
           <a
-            href="/signup"
+            href="/onboarding"
             className="inline-flex h-8 items-center rounded-lg bg-highlight px-3 text-xs font-medium text-bg transition-opacity hover:opacity-90 sm:px-4"
           >
             Start free
@@ -67,7 +67,7 @@ function Hero() {
 
         <div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
           <a
-            href="/signup"
+            href="/onboarding"
             className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-highlight px-7 text-sm font-medium text-bg transition-opacity hover:opacity-90 sm:w-auto"
           >
             Start ranking in AI search
@@ -314,7 +314,7 @@ function RiskFree() {
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <a
-            href="/signup"
+            href="/onboarding"
             className="inline-flex h-11 items-center rounded-lg bg-highlight px-7 text-sm font-medium text-bg transition-opacity hover:opacity-90"
           >
             Start free trial
@@ -427,7 +427,7 @@ function CTA() {
 
         <div className="mt-10">
           <a
-            href="/signup"
+            href="/onboarding"
             className="inline-flex h-12 items-center rounded-lg bg-highlight px-8 text-sm font-medium text-bg transition-opacity hover:opacity-90"
           >
             Start ranking in AI search — free
@@ -449,7 +449,7 @@ function Footer() {
           <a href="https://dash.gedi.dev/login" className="transition-colors hover:text-grad-subtle">
             Sign in
           </a>
-          <a href="/signup" className="transition-colors hover:text-grad-subtle">
+          <a href="/onboarding" className="transition-colors hover:text-grad-subtle">
             Start free
           </a>
           <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-grad-subtle">
