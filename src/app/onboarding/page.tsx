@@ -256,7 +256,7 @@ export default function OnboardingPage() {
           <div className="mx-auto max-w-xl px-4 py-3">
             <div className="mb-2 flex items-center justify-between text-xs">
               <span className="text-muted">Almost there...</span>
-              <span className="text-grad-subtle">2 steps remaining</span>
+              <span className="text-grad-subtle">~1 min</span>
             </div>
             <div className="h-1 w-full overflow-hidden rounded-full bg-border">
               <div className="h-full rounded-full bg-highlight transition-all duration-500" style={{ width: "80%" }} />
@@ -488,7 +488,7 @@ export default function OnboardingPage() {
         <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
           <div className="mx-auto max-w-xl px-4 py-3">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted">Step 10 of 10</span>
+              <span className="text-muted">Ready</span>
               <span className="text-grad-light font-medium">Complete</span>
             </div>
             <div className="h-1 w-full overflow-hidden rounded-full bg-border">
@@ -676,8 +676,8 @@ export default function OnboardingPage() {
         <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
           <div className="mx-auto max-w-xl px-4 py-3">
             <div className="mb-2 flex items-center justify-between text-xs">
-              <span className="text-muted">Step {step + 1} of 10</span>
-              <span className="text-grad-subtle">{10 - (step + 1)} steps remaining</span>
+              <span className="text-muted">Estimated</span>
+              <span className="text-grad-subtle">~1 min</span>
             </div>
             <div className="h-1 w-full overflow-hidden rounded-full bg-border">
               <div className="h-full rounded-full bg-highlight transition-all duration-500" style={{ width: `${Math.round(((step + 1) / 10) * 100)}%` }} />
