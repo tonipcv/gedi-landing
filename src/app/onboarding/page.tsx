@@ -744,20 +744,25 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
 }
 
 function SocialProof() {
-  const colors = ["bg-emerald-500", "bg-teal-500", "bg-green-600", "bg-emerald-600", "bg-teal-600"];
+  const avatars = [
+    "https://i.pravatar.cc/96?img=1",
+    "https://i.pravatar.cc/96?img=5",
+    "https://i.pravatar.cc/96?img=3",
+    "https://i.pravatar.cc/96?img=8",
+    "https://i.pravatar.cc/96?img=11",
+  ];
 
   return (
     <div className="flex flex-col items-center gap-4 pt-2">
       <div className="flex -space-x-2">
-        {colors.map((bg, i) => (
-          <div
+        {avatars.map((src, i) => (
+          <img
             key={i}
-            className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-bg ${bg} flex items-center justify-center`}
-          >
-            <svg className="h-4 w-4 sm:h-5 sm:w-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
-          </div>
+            src={src}
+            alt=""
+            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-bg object-cover grayscale"
+            loading="lazy"
+          />
         ))}
       </div>
       <div className="flex gap-0.5 text-green-500">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
