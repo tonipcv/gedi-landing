@@ -23,10 +23,14 @@ export async function POST(request: Request) {
 
     if (KIODO_KEY) {
       try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+
         const seoRes = await fetch(
           `${KIODO_API}/search?q=${encodeURIComponent(`${domain} website SEO analysis`)}`,
-          { headers: { Authorization: `Bearer ${KIODO_KEY}` } }
+          { headers: { Authorization: `Bearer ${KIODO_KEY}` }, signal: controller.signal }
         );
+        clearTimeout(timeout);
         if (seoRes.ok) {
           seoData = await seoRes.json();
         }

@@ -771,20 +771,37 @@ function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, o
 
   useEffect(() => {
     if (!visible) return;
+
+    let cancelled = false;
+    const controller = new AbortController();
+
     fetch("/api/analyze", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ websiteUrl: url, siteName }),
+      signal: controller.signal,
     })
       .then((r) => r.json())
       .then((data) => {
-        if (data.analysis?.summary) {
-          setSummary(data.analysis.summary);
-        } else {
-          setSummary(defaultSummary());
+        if (!cancelled) {
+          setSummary(data.analysis?.summary || defaultSummary());
         }
       })
-      .catch(() => setSummary(defaultSummary()));
+      .catch(() => {
+        if (!cancelled) setSummary(defaultSummary());
+      });
+
+    const fallback = setTimeout(() => {
+      cancelled = true;
+      controller.abort();
+      setSummary((s) => s || defaultSummary());
+    }, 10000);
+
+    return () => {
+      cancelled = true;
+      controller.abort();
+      clearTimeout(fallback);
+    };
   }, [visible]);
 
   useEffect(() => {
