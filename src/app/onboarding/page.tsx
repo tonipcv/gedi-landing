@@ -206,6 +206,7 @@ export default function OnboardingPage() {
       leadId,
       goal,
       traffic,
+      plan: yearly ? "yearly" : "monthly",
       source: "landing_onboarding",
     });
     return `${APP_URL}/signup?${params.toString()}`;
