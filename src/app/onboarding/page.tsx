@@ -574,7 +574,6 @@ export default function OnboardingPage() {
             trafficLabel={trafficLabel}
             goalLabel={goalLabel}
             articleCount={articleCount}
-            url={normalizeUrl(url)}
             onContinue={handleContinue}
           />
         )}
@@ -752,17 +751,16 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
   );
 }
 
-function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, onContinue, url }: {
+function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, onContinue }: {
   siteName: string;
   trafficLabel: string;
   goalLabel: string;
   articleCount: number;
   onContinue: () => void;
-  url: string;
+  url?: string;
 }) {
   const [visible, setVisible] = useState(false);
   const [done, setDone] = useState(false);
-  const [summary, setSummary] = useState("");
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 400);
@@ -771,52 +769,12 @@ function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, o
 
   useEffect(() => {
     if (!visible) return;
-
-    let cancelled = false;
-    const controller = new AbortController();
-
-    fetch("/api/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ websiteUrl: url, siteName }),
-      signal: controller.signal,
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (!cancelled) {
-          setSummary(data.analysis?.summary || defaultSummary());
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setSummary(defaultSummary());
-      });
-
-    const fallback = setTimeout(() => {
-      cancelled = true;
-      controller.abort();
-      setSummary((s) => s || defaultSummary());
-    }, 10000);
-
-    return () => {
-      cancelled = true;
-      controller.abort();
-      clearTimeout(fallback);
-    };
+    const t = setTimeout(() => setDone(true), 3000);
+    return () => clearTimeout(t);
   }, [visible]);
 
-  useEffect(() => {
-    if (!summary) return;
-    const estimatedTime = summary.length * 15 + 800;
-    const t = setTimeout(() => setDone(true), estimatedTime);
-    return () => clearTimeout(t);
-  }, [summary]);
-
-  function defaultSummary() {
-    return `I analyzed ${siteName}'s structure, content, and SEO footprint. With ${trafficLabel} and a focus on ${goalLabel}, there's a clear gap between where you are and where you could be. Gedi will publish ${articleCount} SEO-optimized articles each month targeting keywords your audience is searching for right now. Combined with automated backlinks and GEO optimization for ChatGPT and Perplexity, your organic visibility will compound over time.`;
-  }
-
-  const body = summary || defaultSummary();
   const intro = `I took a look at ${siteName}`;
+  const body = `I analyzed your site's structure, content, and SEO footprint. With ${trafficLabel} and a focus on ${goalLabel}, there's a clear gap between where you are and where you could be. Gedi will publish ${articleCount} SEO-optimized articles each month targeting keywords your audience is searching for right now. Combined with automated backlinks and GEO optimization for ChatGPT and Perplexity, your organic visibility will compound over time.`;
 
   return (
     <div className="space-y-5">
@@ -825,7 +783,7 @@ function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, o
           {visible ? <Typewriter text={intro} speed={25} /> : "\u00A0"}
         </h2>
         <div className="mt-2 text-sm leading-relaxed text-grad-subtle">
-          {visible && summary ? <Typewriter text={body} speed={10} startDelay={intro.length * 25 + 300} /> : "\u00A0"}
+          {visible ? <Typewriter text={body} speed={10} startDelay={intro.length * 25 + 300} /> : "\u00A0"}
         </div>
       </div>
       {done && (
