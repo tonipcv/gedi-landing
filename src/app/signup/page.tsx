@@ -8,41 +8,16 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://dash.gedi.dev";
 export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.includes("@")) return;
     setLoading(true);
-    try {
-      await fetch(`${APP_URL}/api/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: email.split("@")[0], email, password: "gedi2026!", websiteUrl: "gedi.dev", source: "landing" }),
-      });
-    } catch {}
-    setLoading(false);
-    setSent(true);
-  }
-
-  if (sent) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-bg px-4">
-        <div className="fixed top-0 z-50 flex h-14 w-full items-center justify-center border-b border-border bg-bg/80 backdrop-blur-xl">
-          <a href="/" className="flex items-center gap-2">
-            <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
-            <span className="text-sm font-medium text-grad-light">Gedi</span>
-          </a>
-        </div>
-        <div className="w-full max-w-md text-center">
-          <h2 className="mt-6 text-2xl font-semibold text-grad-light">Check your email</h2>
-          <p className="mt-2 text-sm text-grad-subtle">We sent a confirmation link to <span className="text-grad-light">{email}</span>. Click it to start your onboarding.</p>
-          <a href="/onboarding" className="mt-6 inline-flex h-11 items-center gap-2 rounded-lg bg-highlight px-6 text-sm font-medium text-bg transition-opacity hover:opacity-90">
-            Continue to onboarding <ArrowRight size={16} />
-          </a>
-        </div>
-      </div>
-    );
+    const params = new URLSearchParams({
+      email: email.trim(),
+      source: "landing_signup",
+    });
+    window.location.href = `${APP_URL}/signup?${params.toString()}`;
   }
 
   return (

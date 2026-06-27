@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, Globe, Loader2, Star } from "lucide-react";
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://dash.gedi.dev";
+const ONBOARDING_STORAGE_KEY = "gedi_landing_onboarding";
+
 const goals = [
   { id: "leads", icon: "1", title: "Get new leads", desc: "More qualified visitors into potential customers" },
   { id: "customers", icon: "2", title: "Get more customers", desc: "Turn organic traffic into paying customers" },
@@ -49,6 +52,8 @@ export default function OnboardingPage() {
   const [loadingStep, setLoadingStep] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [yearly, setYearly] = useState(false);
+  const [restored, setRestored] = useState(false);
+  const [leadId, setLeadId] = useState("");
 
   const totalSteps = 11;
   const progress = step <= 0 ? 0 : Math.round((step / (totalSteps - 1)) * 100);
@@ -67,6 +72,81 @@ export default function OnboardingPage() {
       return raw;
     }
   }
+
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(ONBOARDING_STORAGE_KEY);
+      if (!saved) {
+        setRestored(true);
+        return;
+      }
+      const data = JSON.parse(saved);
+      if (typeof data.step === "number") setStep(data.step);
+      if (typeof data.url === "string") setUrl(data.url);
+      if (typeof data.siteName === "string") setSiteName(data.siteName);
+      if (typeof data.goal === "string") setGoal(data.goal);
+      if (typeof data.traffic === "string") setTraffic(data.traffic);
+      if (typeof data.email === "string") setEmail(data.email);
+      if (typeof data.yearly === "boolean") setYearly(data.yearly);
+      if (typeof data.leadId === "string") setLeadId(data.leadId);
+    } catch {
+      window.localStorage.removeItem(ONBOARDING_STORAGE_KEY);
+    } finally {
+      setRestored(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!restored) return;
+    window.localStorage.setItem(
+      ONBOARDING_STORAGE_KEY,
+      JSON.stringify({
+        step,
+        url,
+        siteName,
+        goal,
+        traffic,
+        email,
+        yearly,
+        leadId,
+        updatedAt: new Date().toISOString(),
+      }),
+    );
+  }, [email, goal, leadId, restored, siteName, step, traffic, url, yearly]);
+
+  useEffect(() => {
+    if (!restored) return;
+    if (!url && !goal && !traffic && !email) return;
+
+    const timeout = window.setTimeout(async () => {
+      try {
+        const response = await fetch(`${APP_URL}/api/landing/onboarding`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            leadId: leadId || undefined,
+            step,
+            email,
+            websiteUrl: normalizeUrl(url),
+            siteName,
+            goal,
+            traffic,
+            plan: yearly ? "yearly" : "monthly",
+            source: "landing_onboarding",
+            payload: {
+              url,
+              yearly,
+            },
+          }),
+        });
+        if (!response.ok) return;
+        const body = await response.json();
+        if (body.lead?.id && body.lead.id !== leadId) setLeadId(body.lead.id);
+      } catch {}
+    }, 500);
+
+    return () => window.clearTimeout(timeout);
+  }, [email, goal, leadId, restored, siteName, step, traffic, url, yearly]);
 
   function handleContinue() {
     if (step === 0) {
@@ -118,6 +198,17 @@ export default function OnboardingPage() {
   const wordCount = 1500;
   const price = yearly ? 19 : 29;
   const originalPrice = 49;
+  const signupHref = (() => {
+    const params = new URLSearchParams({
+      email,
+      websiteUrl: normalizeUrl(url),
+      leadId,
+      goal,
+      traffic,
+      source: "landing_onboarding",
+    });
+    return `${APP_URL}/signup?${params.toString()}`;
+  })();
 
   // STEP 8: Loading
   if (step === 8) {
@@ -225,7 +316,7 @@ export default function OnboardingPage() {
                 <span className="text-3xl font-bold text-grad-light">${price}</span>
                 <span className="text-sm text-muted">/month</span>
               </div>
-              <a href={`https://dash.gedi.dev/signup?email=${encodeURIComponent(email)}`} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
+              <a href={signupHref} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
                 Buy Now <ArrowRight size={16} />
               </a>
               <p className="mt-2 text-xs text-muted">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
@@ -360,7 +451,7 @@ export default function OnboardingPage() {
               <p className="text-sm text-grad-subtle">Ready to grow your traffic?</p>
               <p className="mt-1 text-sm font-medium text-grad-light">40% off your first month at ${price}/month, then ${originalPrice}/month. Cancel anytime.</p>
             </div>
-            <a href={`https://dash.gedi.dev/signup?email=${encodeURIComponent(email)}`} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
+            <a href={signupHref} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90">
               Get Traffic on Autopilot <ArrowRight size={16} />
             </a>
           </section>
