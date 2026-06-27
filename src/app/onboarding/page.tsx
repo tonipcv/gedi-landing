@@ -290,8 +290,8 @@ export default function OnboardingPage() {
               <div className="flex items-end gap-1.5 h-32 sm:h-40">
                 {[6, 10, 14, 20, 24, 32, 38, 48, 56, 70, 82, 100].map((h, i) => (
                   <div key={i} className="flex-1 flex flex-col justify-end items-center gap-1.5">
-                    <div className="w-full rounded-t-sm bg-gradient-to-t from-highlight/60 to-highlight transition-all hover:from-highlight/80 hover:to-highlight" style={{ height: `${h}%` }}>
-                      <div className="w-full h-full bg-highlight/30 rounded-t-sm" style={{ clipPath: `polygon(0 0, 100% 0, 100% ${100 - i * 4}%, 0 ${100 - i * 3}%)` }} />
+                    <div className="w-full rounded-t-sm bg-gradient-to-t from-emerald-500 to-green-400 transition-all hover:from-emerald-400 hover:to-green-300" style={{ height: `${h}%` }}>
+                      <div className="w-full h-full bg-green-300/30 rounded-t-sm" style={{ clipPath: `polygon(0 0, 100% 0, 100% ${100 - i * 4}%, 0 ${100 - i * 3}%)` }} />
                     </div>
                     <span className="text-[9px] text-grad-subtle">{["Jul","Ago","Set","Out","Nov","Dez","Jan","Fev","Mar","Abr","Mai","Jun"][i]}</span>
                   </div>
@@ -619,7 +619,7 @@ export default function OnboardingPage() {
               <div className="rounded-xl bg-bg p-4">
                 <div className="flex items-end gap-1 h-16">
                   {[15, 25, 20, 40, 35, 55, 45, 65, 55, 80, 70, 95].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-sm bg-highlight" style={{ height: `${h}%`, opacity: 0.3 + i * 0.055 }} />
+                    <div key={i} className="flex-1 rounded-sm bg-gradient-to-t from-emerald-500 to-green-400" style={{ height: `${h}%`, opacity: 0.4 + i * 0.05 }} />
                   ))}
                 </div>
               </div>
@@ -729,28 +729,23 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
 }
 
 function SocialProof() {
-  const avatars = [
-    "https://i.pravatar.cc/96?img=1",
-    "https://i.pravatar.cc/96?img=5",
-    "https://i.pravatar.cc/96?img=3",
-    "https://i.pravatar.cc/96?img=8",
-    "https://i.pravatar.cc/96?img=11",
-  ];
+  const colors = ["bg-emerald-500", "bg-teal-500", "bg-green-600", "bg-emerald-600", "bg-teal-600"];
 
   return (
     <div className="flex flex-col items-center gap-4 pt-2">
       <div className="flex -space-x-2">
-        {avatars.map((src, i) => (
-          <img
+        {colors.map((bg, i) => (
+          <div
             key={i}
-            src={src}
-            alt=""
-            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-bg object-cover grayscale"
-            loading="lazy"
-          />
+            className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-bg ${bg} flex items-center justify-center`}
+          >
+            <svg className="h-4 w-4 sm:h-5 sm:w-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+          </div>
         ))}
       </div>
-      <div className="flex gap-0.5 text-highlight">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
+      <div className="flex gap-0.5 text-green-500">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
       <p className="text-xs text-muted">3,000+ happy customers</p>
       <ResultsCarousel />
     </div>
