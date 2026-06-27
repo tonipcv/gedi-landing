@@ -442,19 +442,50 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="px-6 py-12">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-xs text-muted sm:flex-row">
-        <p>&copy; {new Date().getFullYear()} Gedi. All rights reserved.</p>
-        <div className="flex gap-6">
-          <a href="https://dash.gedi.dev/login" className="transition-colors hover:text-grad-subtle">
-            Sign in
-          </a>
-          <a href="/onboarding" className="transition-colors hover:text-grad-subtle">
-            Start free
-          </a>
-          <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-grad-subtle">
-            Contact
-          </a>
+    <footer className="border-t border-border px-6 py-16">
+      <div className="mx-auto max-w-5xl">
+        <div className="grid gap-10 sm:grid-cols-4">
+          <div className="sm:col-span-1">
+            <div className="flex items-center gap-2 mb-3">
+              <img src="/future.webp" alt="Gedi" className="h-5 w-5 grayscale" />
+              <span className="text-sm font-medium text-grad-light">Gedi</span>
+            </div>
+            <p className="text-xs leading-relaxed text-muted">
+              AI-powered SEO and GEO platform. Get found on Google, ChatGPT, and every AI search engine.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-grad-subtle">Product</h4>
+            <ul className="space-y-2">
+              <li><a href="/onboarding" className="text-xs text-muted transition-colors hover:text-grad-subtle">Start free</a></li>
+              <li><a href="#how" className="text-xs text-muted transition-colors hover:text-grad-subtle">How it works</a></li>
+              <li><a href="#testimonials" className="text-xs text-muted transition-colors hover:text-grad-subtle">Results</a></li>
+              <li><a href="#compare" className="text-xs text-muted transition-colors hover:text-grad-subtle">Compare</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-grad-subtle">Resources</h4>
+            <ul className="space-y-2">
+              <li><a href="https://dash.gedi.dev/login" className="text-xs text-muted transition-colors hover:text-grad-subtle">Dashboard</a></li>
+              <li><a href="mailto:gedi@kiodo.dev" className="text-xs text-muted transition-colors hover:text-grad-subtle">Contact</a></li>
+              <li><a href="mailto:gedi@kiodo.dev" className="text-xs text-muted transition-colors hover:text-grad-subtle">Support</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-grad-subtle">Legal</h4>
+            <ul className="space-y-2">
+              <li><span className="text-xs text-muted">Privacy Policy</span></li>
+              <li><span className="text-xs text-muted">Terms of Service</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-border pt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p className="text-xs text-muted">&copy; {new Date().getFullYear()} Gedi Group. All rights reserved.</p>
+          <p className="text-xs text-muted">Made for the AI era</p>
         </div>
       </div>
     </footer>
