@@ -287,7 +287,7 @@ export default function OnboardingPage() {
             </div>
             <div className="rounded-xl border border-border bg-surface p-5">
               <p className="text-xs font-medium text-grad-subtle mb-3 uppercase tracking-wider">Traffic Growth Projection — 12 Months</p>
-              <div className="flex items-end gap-1.5 h-32 sm:h-40">
+              <div className="flex gap-1.5 h-32 sm:h-40">
                 {[6, 10, 14, 20, 24, 32, 38, 48, 56, 70, 82, 100].map((h, i) => (
                   <div key={i} className="flex-1 flex flex-col justify-end items-center gap-1.5">
                     <div className="w-full rounded-t-sm bg-gradient-to-t from-emerald-500 to-green-400 transition-all hover:from-emerald-400 hover:to-green-300" style={{ height: `${h}%` }}>
@@ -617,9 +617,9 @@ export default function OnboardingPage() {
                 {[0, 1, 2].map((d) => <span key={d} className={`h-1.5 w-1.5 rounded-full ${d === 0 ? "bg-highlight" : "bg-border"}`} />)}
               </div>
               <div className="rounded-xl bg-bg p-4">
-                <div className="flex items-end gap-1 h-16">
+                <div className="flex gap-1 h-16">
                   {[15, 25, 20, 40, 35, 55, 45, 65, 55, 80, 70, 95].map((h, i) => (
-                    <div key={i} className="flex-1 rounded-sm bg-gradient-to-t from-emerald-500 to-green-400" style={{ height: `${h}%`, opacity: 0.4 + i * 0.05 }} />
+                    <div key={i} className="flex-1 rounded-sm bg-gradient-to-t from-emerald-500 to-green-400 self-end" style={{ height: `${h}%`, opacity: 0.4 + i * 0.05 }} />
                   ))}
                 </div>
               </div>
