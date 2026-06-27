@@ -52,6 +52,7 @@ export default function OnboardingPage() {
   const [emailValid, setEmailValid] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [yearly, setYearly] = useState(false);
   const [restored, setRestored] = useState(false);
   const [leadId, setLeadId] = useState("");
   const [checkingOut, setCheckingOut] = useState(false);
@@ -88,6 +89,7 @@ export default function OnboardingPage() {
       if (typeof data.goal === "string") setGoal(data.goal);
       if (typeof data.traffic === "string") setTraffic(data.traffic);
       if (typeof data.email === "string") setEmail(data.email);
+      if (typeof data.yearly === "boolean") setYearly(data.yearly);
       if (typeof data.leadId === "string") setLeadId(data.leadId);
     } catch {
       window.localStorage.removeItem(ONBOARDING_STORAGE_KEY);
@@ -107,11 +109,12 @@ export default function OnboardingPage() {
         goal,
         traffic,
         email,
+        yearly,
         leadId,
         updatedAt: new Date().toISOString(),
       }),
     );
-  }, [email, goal, leadId, restored, siteName, step, traffic, url]);
+  }, [email, goal, leadId, restored, siteName, step, traffic, url, yearly]);
 
   useEffect(() => {
     if (!restored) return;
@@ -130,9 +133,9 @@ export default function OnboardingPage() {
             siteName,
             goal,
             traffic,
-            plan: "yearly",
+            plan: yearly ? "yearly" : "monthly",
             source: "landing_onboarding",
-            payload: { url },
+            payload: { url, yearly },
           }),
         });
         if (!response.ok) return;
@@ -142,7 +145,7 @@ export default function OnboardingPage() {
     }, 500);
 
     return () => window.clearTimeout(timeout);
-  }, [email, goal, leadId, restored, siteName, step, traffic, url]);
+  }, [email, goal, leadId, restored, siteName, step, traffic, url, yearly]);
 
   function handleContinue() {
     if (step === 0) {
@@ -192,9 +195,8 @@ export default function OnboardingPage() {
   const goalLabel = goals.find((g) => g.id === goal)?.title?.toLowerCase() || "growing your business";
   const articleCount = 30;
   const wordCount = 1500;
-  const yearlyPrice = 228;
-  const monthlyEquivalent = 19;
-  const originalYearly = 588;
+  const price = yearly ? 19 : 29;
+  const originalPrice = 49;
   async function handleCheckout() {
     setCheckingOut(true);
     try {
@@ -207,7 +209,7 @@ export default function OnboardingPage() {
           leadId,
           goal,
           traffic,
-          plan: "yearly",
+          plan: yearly ? "yearly" : "monthly",
           siteName,
         }),
       });
@@ -319,25 +321,32 @@ export default function OnboardingPage() {
               <h2 className="text-2xl font-semibold text-grad-light">Unlock Traffic on Autopilot</h2>
               <p className="mt-2 text-sm text-grad-subtle">Keyword research, daily articles, auto-publishing, and backlinks included. For less than a single freelance article.</p>
             </div>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-muted">Monthly</span>
+              <button onClick={() => setYearly(!yearly)} className={`relative h-6 w-11 rounded-full transition ${yearly ? "bg-highlight" : "bg-border"}`}>
+                <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition ${yearly ? "left-6" : "left-0.5"}`} />
+              </button>
+              <span className="text-xs text-grad-subtle">Yearly <span className="text-grad-light font-medium">Save 35%</span></span>
+            </div>
 
             <div className="rounded-2xl border border-border bg-surface p-6">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted uppercase tracking-wider">Business</span>
-                <span className="rounded-full bg-emerald-500/10 px-3 py-0.5 text-xs font-medium text-emerald-400">Annual Plan</span>
+                <span className="rounded-full bg-highlight/10 px-3 py-0.5 text-xs font-medium text-grad-light">1 website</span>
               </div>
               <h3 className="mt-3 text-xl font-semibold text-grad-light">Business Plan</h3>
               <p className="mt-1 text-sm text-grad-subtle">Everything you need to grow organic traffic</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-sm text-muted line-through">${originalYearly}</span>
-                <span className="text-3xl font-bold text-grad-light">${yearlyPrice}</span>
-                <span className="text-sm text-muted">/year</span>
+                <span className="text-sm text-muted line-through">${originalPrice}</span>
+                <span className="text-3xl font-bold text-grad-light">${price}</span>
+                <span className="text-sm text-muted">/month</span>
               </div>
-              <p className="mt-1 text-xs text-muted">Just ${monthlyEquivalent}/mo billed annually — save 61%</p>
+              <p className="mt-1 text-xs text-muted">{yearly ? "$228 billed annually" : "Billed monthly"}</p>
               <button onClick={handleCheckout} disabled={checkingOut} className="mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-50">
                 {checkingOut ? "Redirecting..." : "Buy Now"}
                 {!checkingOut && <ArrowRight size={16} />}
               </button>
-              <p className="mt-2 text-xs text-muted">${yearlyPrice} billed once per year. Cancel anytime.</p>
+              <p className="mt-2 text-xs text-muted">{yearly ? "One payment of $228/year. Cancel anytime." : "$29/month. Cancel anytime."}</p>
               <div className="mt-5 space-y-2 border-t border-border pt-5">
                 {["Personalized growth plan", `${articleCount} SEO/GEO articles (1 daily)`, `${wordCount}+ word long-form articles`, "Auto-publish to your website", "10 backlink credits monthly", "Auto images, links & promotion", "Unlimited rewrites & team members"].map((f) => (
                   <div key={f} className="flex items-center gap-2 text-sm text-grad-subtle"><Check size={14} className="text-highlight shrink-0" /> {f}</div>
@@ -468,7 +477,7 @@ export default function OnboardingPage() {
           <section className="space-y-5 text-center">
             <div className="rounded-2xl border border-border bg-surface px-5 py-4 text-left">
               <p className="text-sm text-grad-subtle">Ready to grow your traffic?</p>
-              <p className="mt-1 text-sm font-medium text-grad-light">${yearlyPrice}/year — just ${monthlyEquivalent}/mo. Cancel anytime.</p>
+              <p className="mt-1 text-sm font-medium text-grad-light">{yearly ? "$228/year — just $19/mo. Cancel anytime." : "$29/month. Cancel anytime."}</p>
             </div>
             <button onClick={handleCheckout} disabled={checkingOut} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-50">
               {checkingOut ? "Redirecting..." : "Get Traffic on Autopilot"}

@@ -38,12 +38,12 @@ export async function POST(request: Request) {
     const traffic = String(body.traffic || "");
     const plan = String(body.plan || "monthly");
     const siteName = String(body.siteName || "");
+    const isYearly = plan === "yearly";
 
     if (!email.includes("@")) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    const priceId = process.env.STRIPE_PRICE_STARTER || "starter_monthly";
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://dash.gedi.dev";
 
     if (!secretKey().startsWith("sk_")) {
@@ -52,14 +52,26 @@ export async function POST(request: Request) {
       });
     }
 
+    const lineItem: Record<string, string | number> = {
+      "line_items[0][quantity]": 1,
+    };
+
+    if (isYearly) {
+      lineItem["line_items[0][price_data][currency]"] = "usd";
+      lineItem["line_items[0][price_data][unit_amount]"] = 22800;
+      lineItem["line_items[0][price_data][recurring][interval]"] = "year";
+      lineItem["line_items[0][price_data][product_data][name]"] = "Gedi Business — Annual";
+    } else {
+      lineItem["line_items[0][price_data][currency]"] = "usd";
+      lineItem["line_items[0][price_data][unit_amount]"] = 2900;
+      lineItem["line_items[0][price_data][recurring][interval]"] = "month";
+      lineItem["line_items[0][price_data][product_data][name]"] = "Gedi Business — Monthly";
+    }
+
     const session = await stripePost<{ id: string; url: string }>("/checkout/sessions", {
       mode: "subscription",
       "customer_email": email,
-      "line_items[0][price_data][currency]": "usd",
-      "line_items[0][price_data][unit_amount]": 22800,
-      "line_items[0][price_data][recurring][interval]": "year",
-      "line_items[0][price_data][product_data][name]": "Gedi Business — Annual Plan",
-      "line_items[0][quantity]": 1,
+      ...lineItem,
       success_url: `${appUrl}/pricing?checkout=success`,
       cancel_url: appUrl,
       "metadata[source]": "landing_checkout",
