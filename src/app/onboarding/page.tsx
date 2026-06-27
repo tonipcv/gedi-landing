@@ -355,6 +355,7 @@ export default function OnboardingPage() {
                 ))}
               </div>
             </div>
+            <ResultsCarousel />
             <p className="text-center text-xs text-muted">Your account will be created with <span className="text-grad-subtle">{email}</span></p>
             <div className="rounded-xl border border-border bg-surface p-4 text-center">
               <p className="text-sm font-medium text-grad-light">Satisfaction Guarantee</p>
