@@ -214,7 +214,8 @@ export default function OnboardingPage() {
   // STEP 8: Loading
   if (step === 8) {
     return (
-      <div className="min-h-screen bg-bg px-4 py-16">
+      <div className="min-h-screen bg-bg px-4 pt-24 pb-16">
+        <TrialBanner />
         <Header progress={100} />
         <div className="mx-auto mt-12 max-w-xl">
           <div className="flex-1 rounded-2xl border border-border bg-surface px-5 py-4">
@@ -248,7 +249,8 @@ export default function OnboardingPage() {
   if (step === 10) {
     return (
       <div className="min-h-screen bg-bg">
-        <div className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
+        <TrialBanner />
+        <div className="fixed top-9 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
           <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
             <a href="/" className="flex items-center gap-2">
               <img src="/future.webp" alt="Gedi" className="h-6 w-6 grayscale" />
@@ -261,7 +263,7 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-2xl px-4 pt-20 pb-16 space-y-16">
+        <div className="mx-auto max-w-2xl px-4 pt-28 pb-16 space-y-16">
           {/* Result preview */}
           <section className="space-y-5">
             <div className="rounded-2xl border border-border bg-surface px-5 py-4">
@@ -463,7 +465,8 @@ export default function OnboardingPage() {
 
   // STEPS 0–7 and 9
   return (
-    <div className="min-h-screen bg-bg px-4 py-16">
+    <div className="min-h-screen bg-bg px-4 pt-24 pb-16">
+      <TrialBanner />
       <Header progress={progress} onBack={step > 0 && step < 8 ? () => setStep((s) => s - 1) : undefined} />
 
       <div className="mx-auto mt-8 max-w-xl space-y-5">
@@ -631,6 +634,19 @@ export default function OnboardingPage() {
             <SocialProof />
           </>
         )}
+      </div>
+    </div>
+  );
+}
+
+function TrialBanner() {
+  return (
+    <div className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-surface/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-9 max-w-xl items-center justify-center gap-2 px-4">
+        <span className="h-1.5 w-1.5 rounded-full bg-highlight animate-pulse" />
+        <p className="text-xs text-grad-subtle">
+          <span className="font-medium text-grad-light">7-day free trial</span> — Finish your onboarding
+        </p>
       </div>
     </div>
   );
