@@ -55,7 +55,10 @@ export async function POST(request: Request) {
     const session = await stripePost<{ id: string; url: string }>("/checkout/sessions", {
       mode: "subscription",
       "customer_email": email,
-      "line_items[0][price]": priceId,
+      "line_items[0][price_data][currency]": "usd",
+      "line_items[0][price_data][unit_amount]": 22800,
+      "line_items[0][price_data][recurring][interval]": "year",
+      "line_items[0][price_data][product_data][name]": "Gedi Business — Annual Plan",
       "line_items[0][quantity]": 1,
       success_url: `${appUrl}/pricing?checkout=success`,
       cancel_url: appUrl,
