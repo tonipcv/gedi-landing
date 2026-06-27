@@ -765,7 +765,7 @@ function SocialProof() {
           />
         ))}
       </div>
-      <div className="flex gap-0.5 text-green-500">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
+      <div className="flex gap-0.5 text-highlight">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={12} fill="currentColor" />)}</div>
       <p className="text-xs text-muted">3,000+ happy customers</p>
       <ResultsCarousel />
     </div>
