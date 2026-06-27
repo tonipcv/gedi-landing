@@ -1,49 +1,23 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { ArrowRight, Mail, Lock, Loader2 } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://dash.gedi.dev";
 
 export default function SignupPage() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setError("");
     if (!email.includes("@")) return;
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters");
-      return;
-    }
     setLoading(true);
-
-    try {
-      const res = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email.trim(),
-          password,
-          source: "landing_signup",
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || "Signup failed");
-        setLoading(false);
-        return;
-      }
-
-      window.location.href = `${APP_URL}/onboarding`;
-    } catch {
-      setError("Something went wrong. Please try again.");
-      setLoading(false);
-    }
+    const params = new URLSearchParams({
+      email: email.trim(),
+      source: "landing_signup",
+    });
+    window.location.href = `${APP_URL}/signup?${params.toString()}`;
   }
 
   return (
@@ -57,7 +31,7 @@ export default function SignupPage() {
 
       <div className="w-full max-w-md rounded-xl border border-border bg-surface p-6 sm:p-8">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-semibold text-grad-light">Create your account</h1>
+          <h1 className="text-2xl font-semibold text-grad-light">Create your workspace</h1>
           <p className="mt-2 text-sm text-grad-subtle">Start ranking in AI search in under 5 minutes.</p>
         </div>
 
@@ -68,6 +42,7 @@ export default function SignupPage() {
               <Mail size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
                 id="email"
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -77,40 +52,9 @@ export default function SignupPage() {
               />
             </div>
           </div>
-
-          <div>
-            <label className="mb-1.5 block text-xs font-medium text-muted" htmlFor="password">Password</label>
-            <div className="relative">
-              <Lock size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-border bg-bg py-2.5 pl-9 pr-3 text-sm text-grad-subtle placeholder:text-muted focus:border-muted focus:outline-none"
-                placeholder="Min. 8 characters"
-                minLength={8}
-                required
-              />
-            </div>
-          </div>
-
-          {error && (
-            <p className="rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs text-red-400">{error}</p>
-          )}
-
           <button disabled={loading} className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-highlight text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-50">
-            {loading ? (
-              <>
-                <Loader2 size={16} className="animate-spin" />
-                Creating account...
-              </>
-            ) : (
-              <>
-                Start ranking in AI search
-                <ArrowRight size={16} />
-              </>
-            )}
+            {loading ? "Creating..." : "Start ranking in AI search"}
+            {!loading && <ArrowRight size={16} />}
           </button>
         </form>
 
