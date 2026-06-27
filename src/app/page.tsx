@@ -19,7 +19,7 @@ export default function LandingPage() {
 
 function Nav() {
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-border bg-bg/80 backdrop-blur-xl">
+    <nav className="fixed top-0 z-50 w-full bg-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2 sm:gap-3">
           <img src="/future.webp" alt="Gedi" className="h-7 w-7 sm:h-8 sm:w-8 grayscale" />
@@ -87,38 +87,13 @@ function Hero() {
 }
 
 function Stats() {
-  const stats = [
-    { value: "84%", label: "of GPT answers cite external sources" },
-    { value: "2.7B", label: "monthly ChatGPT queries and growing" },
-    { value: "60%", label: "of searches will be AI-powered by 2027" },
-    { value: "-73%", label: "Google organic traffic decline on AI-answered queries" },
-  ];
-
   return (
-    <section className="border-t border-border px-6 py-24">
+    <section className="px-6 pt-24 pb-4">
       <div className="mx-auto max-w-5xl">
         <ResultsCarousel />
-        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
-          The Shift Is Already Happening
-        </p>
-        <h2 className="mt-4 text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
-          AI search is passing Google
+        <h2 className="mx-auto mt-10 max-w-3xl text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-4xl">
+          AI traffic that grows your business
         </h2>
-
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-2 bg-surface px-6 py-10">
-              <span className="text-[40px] font-semibold tracking-tight text-grad-stat">
-                {stat.value}
-              </span>
-              <span className="text-center text-xs leading-relaxed text-grad-subtle">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <p className="mt-6 text-center text-xs text-muted">
-          Sources: Gartner, Similarweb, SparkToro, Search Engine Land
-        </p>
       </div>
     </section>
   );
@@ -171,14 +146,41 @@ function Testimonials({ id }: { id: string }) {
   ];
 
   return (
-    <section id={id} className="border-t border-border px-4 py-16 sm:px-6 sm:py-24">
+    <section id={id} className="px-4 pt-4 pb-16 sm:px-6 sm:pt-6 sm:pb-24">
       <div className="mx-auto max-w-5xl">
         <img src="/before.webp" alt="Before and After Results" className="mx-auto mb-12 w-full max-w-4xl rounded-xl" />
-        <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
-          Trusted by Forward-Thinking Teams
+
+        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { value: "84%", label: "of GPT answers cite external sources" },
+            { value: "2.7B", label: "monthly ChatGPT queries and growing" },
+            { value: "60%", label: "of searches will be AI-powered by 2027" },
+            { value: "-73%", label: "Google organic traffic decline on AI-answered queries" },
+          ].map((stat) => (
+            <div key={stat.label} className="flex flex-col items-center gap-2 bg-surface px-6 py-10">
+              <span className="text-[40px] font-semibold tracking-tight text-grad-stat">
+                {stat.value}
+              </span>
+              <span className="text-center text-xs leading-relaxed text-grad-subtle">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-center text-xs text-muted">
+          Sources: Gartner, Similarweb, SparkToro, Search Engine Land
         </p>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-20 border-t border-border pt-16">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <span className="text-sm font-semibold text-grad-light">4.9/5</span>
+            <span className="text-xs text-muted">from 200+ reviews</span>
+          </div>
+          <h2 className="text-center text-2xl font-semibold tracking-tight text-grad-light sm:text-3xl">
+            Trusted by forward-thinking teams
+          </h2>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
               <Stars />
@@ -220,7 +222,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="border-t border-border px-6 py-24">
+    <section id="how" className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           How Gedi Works
@@ -254,7 +256,7 @@ function Comparison() {
   ];
 
   return (
-    <section id="compare" className="border-t border-border px-6 py-24">
+    <section id="compare" className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Why Gedi
@@ -298,7 +300,7 @@ function Comparison() {
 
 function RiskFree() {
   return (
-    <section className="border-t border-border px-6 py-24">
+    <section className="px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted">
           Risk Free
@@ -383,7 +385,7 @@ function TestimonialsSecond({ id }: { id: string }) {
   ];
 
   return (
-    <section id={id} className="border-t border-border px-4 py-16 sm:px-6 sm:py-24">
+    <section id={id} className="px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-muted">
           More Stories
@@ -414,7 +416,7 @@ function TestimonialsSecond({ id }: { id: string }) {
 
 function CTA() {
   return (
-    <section className="border-t border-border px-6 py-24">
+    <section className="px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-semibold tracking-tight text-grad sm:text-4xl">
           The next wave of search is here.
@@ -440,7 +442,7 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-12">
+    <footer className="px-6 py-12">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-xs text-muted sm:flex-row">
         <p>&copy; {new Date().getFullYear()} Gedi. All rights reserved.</p>
         <div className="flex gap-6">
