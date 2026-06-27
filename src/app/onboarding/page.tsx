@@ -574,6 +574,7 @@ export default function OnboardingPage() {
             trafficLabel={trafficLabel}
             goalLabel={goalLabel}
             articleCount={articleCount}
+            url={normalizeUrl(url)}
             onContinue={handleContinue}
           />
         )}
@@ -751,15 +752,17 @@ function InfoStep({ title, text, onContinue, children }: { title: string; text: 
   );
 }
 
-function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, onContinue }: {
+function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, onContinue, url }: {
   siteName: string;
   trafficLabel: string;
   goalLabel: string;
   articleCount: number;
   onContinue: () => void;
+  url: string;
 }) {
   const [visible, setVisible] = useState(false);
   const [done, setDone] = useState(false);
+  const [summary, setSummary] = useState("");
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 400);
@@ -768,12 +771,35 @@ function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, o
 
   useEffect(() => {
     if (!visible) return;
-    const t = setTimeout(() => setDone(true), 2500);
-    return () => clearTimeout(t);
+    fetch("/api/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ websiteUrl: url, siteName }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.analysis?.summary) {
+          setSummary(data.analysis.summary);
+        } else {
+          setSummary(defaultSummary());
+        }
+      })
+      .catch(() => setSummary(defaultSummary()));
   }, [visible]);
 
+  useEffect(() => {
+    if (!summary) return;
+    const estimatedTime = summary.length * 15 + 800;
+    const t = setTimeout(() => setDone(true), estimatedTime);
+    return () => clearTimeout(t);
+  }, [summary]);
+
+  function defaultSummary() {
+    return `I analyzed ${siteName}'s structure, content, and SEO footprint. With ${trafficLabel} and a focus on ${goalLabel}, there's a clear gap between where you are and where you could be. Gedi will publish ${articleCount} SEO-optimized articles each month targeting keywords your audience is searching for right now. Combined with automated backlinks and GEO optimization for ChatGPT and Perplexity, your organic visibility will compound over time.`;
+  }
+
+  const body = summary || defaultSummary();
   const intro = `I took a look at ${siteName}`;
-  const body = `I analyzed your site's structure, content, and SEO footprint. With ${trafficLabel} and a focus on ${goalLabel}, there's a clear gap between where you are and where you could be. Gedi will publish ${articleCount} SEO-optimized articles each month targeting keywords your audience is searching for right now. Combined with automated backlinks and GEO optimization for ChatGPT and Perplexity, your organic visibility will compound over time.`;
 
   return (
     <div className="space-y-5">
@@ -782,7 +808,7 @@ function TypewriterAnalysis({ siteName, trafficLabel, goalLabel, articleCount, o
           {visible ? <Typewriter text={intro} speed={25} /> : "\u00A0"}
         </h2>
         <div className="mt-2 text-sm leading-relaxed text-grad-subtle">
-          {visible ? <Typewriter text={body} speed={10} startDelay={intro.length * 25 + 300} /> : "\u00A0"}
+          {visible && summary ? <Typewriter text={body} speed={10} startDelay={intro.length * 25 + 300} /> : "\u00A0"}
         </div>
       </div>
       {done && (
