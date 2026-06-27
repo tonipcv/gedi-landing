@@ -214,7 +214,7 @@ export default function OnboardingPage() {
   // STEP 8: Loading
   if (step === 8) {
     return (
-      <div className="min-h-screen bg-bg px-4 pt-24 pb-16">
+      <div className="min-h-screen bg-bg px-4 pt-24 pb-24">
         <TrialBanner />
         <Header progress={100} />
         <div className="mx-auto mt-12 max-w-xl">
@@ -241,6 +241,17 @@ export default function OnboardingPage() {
             })}
           </div>
         </div>
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
+          <div className="mx-auto max-w-xl px-4 py-3">
+            <div className="mb-2 flex items-center justify-between text-xs">
+              <span className="text-muted">Almost there...</span>
+              <span className="text-grad-subtle">2 steps remaining</span>
+            </div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-border">
+              <div className="h-full rounded-full bg-highlight transition-all duration-500" style={{ width: "80%" }} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -263,7 +274,7 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        <div className="mx-auto max-w-2xl px-4 pt-28 pb-16 space-y-16">
+        <div className="mx-auto max-w-2xl px-4 pt-28 pb-24 space-y-16">
           {/* Result preview */}
           <section className="space-y-5">
             <div className="rounded-2xl border border-border bg-surface px-5 py-4">
@@ -459,13 +470,24 @@ export default function OnboardingPage() {
             </a>
           </section>
         </div>
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
+          <div className="mx-auto max-w-xl px-4 py-3">
+            <div className="mb-2 flex items-center justify-between text-xs">
+              <span className="text-muted">Step 10 of 10</span>
+              <span className="text-grad-light font-medium">Complete</span>
+            </div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-border">
+              <div className="h-full rounded-full bg-highlight" style={{ width: "100%" }} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   // STEPS 0–7 and 9
   return (
-    <div className="min-h-screen bg-bg px-4 pt-24 pb-16">
+    <div className="min-h-screen bg-bg px-4 pt-24 pb-24">
       <TrialBanner />
       <Header progress={progress} onBack={step > 0 && step < 8 ? () => setStep((s) => s - 1) : undefined} />
 
@@ -635,6 +657,19 @@ export default function OnboardingPage() {
           </>
         )}
       </div>
+      {step < 8 && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-bg/90 backdrop-blur-xl">
+          <div className="mx-auto max-w-xl px-4 py-3">
+            <div className="mb-2 flex items-center justify-between text-xs">
+              <span className="text-muted">Step {step + 1} of 10</span>
+              <span className="text-grad-subtle">{10 - (step + 1)} steps remaining</span>
+            </div>
+            <div className="h-1 w-full overflow-hidden rounded-full bg-border">
+              <div className="h-full rounded-full bg-highlight transition-all duration-500" style={{ width: `${Math.round(((step + 1) / 10) * 100)}%` }} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
