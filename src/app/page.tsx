@@ -39,7 +39,7 @@ function Nav() {
             href="/onboarding"
             className="inline-flex h-8 items-center rounded-lg bg-highlight px-3 text-xs font-medium text-bg transition-opacity hover:opacity-90 sm:px-4"
           >
-            Start free
+            Try for 7 days
           </a>
         </div>
       </div>
@@ -133,16 +133,6 @@ function Testimonials({ id }: { id: string }) {
       name: "Dr. Aisha Okafor",
       role: "CTO at NeuroPilot",
     },
-    {
-      text: "Our agency manages 40+ brands. Gedi replaced three legacy SEO tools and cut our per-client cost by 60%. The AI ranking features are unmatched.",
-      name: "Lukas Bergström",
-      role: "SEO Director at Creitive",
-    },
-    {
-      text: "I was tired of burning budget on PPC. Gedi's organic AI traffic outperformed our Google Ads campaign in 5 weeks. Best decision this year.",
-      name: "Rachel Kim",
-      role: "VP of Digital at Luminora",
-    },
   ];
 
   return (
@@ -180,7 +170,7 @@ function Testimonials({ id }: { id: string }) {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
               <Stars />
@@ -370,18 +360,6 @@ function TestimonialsSecond({ id }: { id: string }) {
       role: "Head of Content at Zelios",
       metric: "8x ROI in 30 days",
     },
-    {
-      text: "We were invisible in AI search before Gedi. Now 62% of our organic traffic comes from ChatGPT and Gemini referrals. Game changer.",
-      name: "Kenji Tanaka",
-      role: "Growth Lead at OmniStack",
-      metric: "62% more AI traffic",
-    },
-    {
-      text: "As a healthcare brand, trust and visibility are everything. Gedi helped us rank for medical queries in AI search, cutting our CAC by 40%.",
-      name: "Maria Santos",
-      role: "CMO at Boreal Health",
-      metric: "Cut CAC by 40%",
-    },
   ];
 
   return (
@@ -394,7 +372,7 @@ function TestimonialsSecond({ id }: { id: string }) {
           Teams winning with Gedi
         </h2>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
               <Stars />
@@ -458,7 +436,7 @@ function Footer() {
           <div>
             <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-grad-subtle">Product</h4>
             <ul className="space-y-2">
-              <li><a href="/onboarding" className="text-xs text-muted transition-colors hover:text-grad-subtle">Start free</a></li>
+              <li><a href="/onboarding" className="text-xs text-muted transition-colors hover:text-grad-subtle">Try for 7 days</a></li>
               <li><a href="#how" className="text-xs text-muted transition-colors hover:text-grad-subtle">How it works</a></li>
               <li><a href="#testimonials" className="text-xs text-muted transition-colors hover:text-grad-subtle">Results</a></li>
               <li><a href="#compare" className="text-xs text-muted transition-colors hover:text-grad-subtle">Compare</a></li>

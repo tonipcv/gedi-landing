@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Gedi",
   },
   description:
-    "AI-powered SEO co-pilot that optimizes your content for ChatGPT, Perplexity, Gemini, and Google. Get your brand cited as the #1 source in AI search results. Start free — no credit card.",
+    "AI-powered SEO co-pilot that optimizes your content for ChatGPT, Perplexity, Gemini, and Google. Get your brand cited as the #1 source in AI search results. Try for 7 days — no credit card.",
   keywords: [
     "AI SEO",
     "ChatGPT SEO",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Gedi: Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
     description:
-      "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Rank in ChatGPT, Perplexity, and Google. Start free.",
+      "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Rank in ChatGPT, Perplexity, and Google. Try for 7 days.",
     url: BASE_URL,
     siteName: "Gedi",
     locale: "en_US",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gedi: Rank #1 in AI Search | ChatGPT, Perplexity & Google SEO",
     description:
-      "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Start free.",
+      "AI-powered SEO co-pilot that puts your brand at the top of AI search results. Try for 7 days.",
   },
   robots: {
     index: true,
