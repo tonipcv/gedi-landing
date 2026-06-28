@@ -37,7 +37,7 @@ function Nav() {
             href="/signup"
             className="inline-flex h-8 items-center rounded-lg bg-highlight px-3 text-xs font-medium text-bg transition-opacity hover:opacity-90 sm:px-4"
           >
-            Start free
+            Try for 7 days
           </a>
         </div>
       </div>
@@ -138,6 +138,11 @@ function Testimonials({ id }: { id: string }) {
       name: "Elena Kowalski",
       role: "Marketing Director at Flux AI",
     },
+    {
+      text: "We integrated Gedi into our content pipeline and saw a 210% increase in AI-driven organic leads within the first month.",
+      name: "Dr. Aisha Okafor",
+      role: "CTO at NeuroPilot",
+    },
   ];
 
   return (
@@ -147,7 +152,7 @@ function Testimonials({ id }: { id: string }) {
           Trusted by Forward-Thinking Teams
         </p>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
               <p className="text-sm leading-relaxed text-grad-subtle">&ldquo;{q.text}&rdquo;</p>
@@ -330,6 +335,12 @@ function TestimonialsSecond({ id }: { id: string }) {
       role: "Founder at ShipFast",
       metric: "12% GPT mention rate",
     },
+    {
+      text: "Gedi paid for itself in the first 10 days. We saw 8x ROI within a month by ranking in ChatGPT and Perplexity.",
+      name: "Olivia Dupont",
+      role: "Head of Content at Zelios",
+      metric: "8x ROI in 30 days",
+    },
   ];
 
   return (
@@ -342,7 +353,7 @@ function TestimonialsSecond({ id }: { id: string }) {
           Teams winning with Gedi
         </h2>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {quotes.map((q) => (
             <div key={q.name} className="gradient-border rounded-xl bg-surface p-6">
               <span className="inline-block rounded-full border border-border px-2.5 py-0.5 text-[10px] font-medium text-grad-subtle">
@@ -397,7 +408,7 @@ function Footer() {
             Sign in
           </a>
           <a href="/signup" className="transition-colors hover:text-grad-subtle">
-            Start free
+            Try for 7 days
           </a>
           <a href="mailto:gedi@kiodo.dev" className="transition-colors hover:text-grad-subtle">
             Contact
